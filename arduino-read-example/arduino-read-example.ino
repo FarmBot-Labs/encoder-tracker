@@ -26,18 +26,30 @@ void setup()
   SPI.setClockDivider(SPI_CLOCK_DIV4);
   SPI.begin();
   //SPI.beginTransaction(SPISettings(20000000, MSBFIRST, SPI_MODE0));
+  
+  ResetEncoder(_X1);
+  ResetEncoder(_X2);
+  ResetEncoder(_Y);
+  ResetEncoder(_Z);
 }
 
 void loop()
 {
   const int readPeriodMs = 200;
   
-  if (LOW == digitalRead(READ_ENA_PIN))
-  {
-    long EncoderData = ReadEncoder(_X1);
-    Serial.print("EncoderData: ");
-    Serial.println(EncoderData);
-  }
+  long X1EncoderData = ReadEncoder(_X1);
+  long X2EncoderData = ReadEncoder(_X2);
+  long YEncoderData = ReadEncoder(_Y);
+  long ZEncoderData = ReadEncoder(_Z);
+  Serial.print("EncoderData");
+  Serial.print(" X1: ");
+  Serial.print(X1EncoderData);
+  Serial.print(" X2: ");
+  Serial.print(X2EncoderData);
+  Serial.print(" Y: ");
+  Serial.print(YEncoderData);
+  Serial.print(" Z: ");
+  Serial.println(ZEncoderData);
   
   delay(readPeriodMs);
 }
